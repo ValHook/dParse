@@ -50,10 +50,19 @@ define('DPARSE_SELF_CLOSING_TAG', 2);
 
 
 
+/* Beginner function that downloads source from a target without building a DOM
+ * @param    $source: It can be either a web URL, a local filename or a plain html string 
+ * @param    $args: All possible arguments are listed within the function declaration */
+function dParseGetContents($source, $args = array())
+{
+	return createdParseDOM($source, $args, FALSE);
+}
+
+
 /* Beginner function that creates the dParse main DOM object
  * @param    $source: It can be either a web URL, a local filename or a plain html string 
  * @param    $args: All possible arguments are listed within the function declaration */
-function createdParseDOM($source, array $args = array())
+function createdParseDOM($source, array $args = array(), $createDOM = TRUE)
 {
 	/* If no source is provided then we stop here */
 	if (!$source)
@@ -160,7 +169,10 @@ function createdParseDOM($source, array $args = array())
 	}
 
 	/* Build the DOM */
-	return new DParseDOM($source, $timer, $content_type, $args['force_input_charset'], $args["output_charset"], $args["strip_whitespaces"], $args['is_xml'], $args['enable_logger']);
+	if ($createDOM)
+		return new DParseDOM($source, $timer, $content_type, $args['force_input_charset'], $args["output_charset"], $args["strip_whitespaces"], $args['is_xml'], $args['enable_logger']);
+	else
+		return $source;
 }
 
 
@@ -1058,7 +1070,7 @@ class DParseDOMNode
 	function &breadcrumb() { return $this->breadcrumb; }
 	function breadcrumb_size() { return count($this->breadcrumb); }
 	function &breadcrumb_element($i) { return $this->breadcrumb[$i]; }
-	function val()
+	function val($value = FALSE)
 	{ 
 		// Also need to handle textareas, select
 		return $this->tagdata['attr']['value'];
@@ -1753,7 +1765,7 @@ http://api.jquery.com/category/manipulation/
 
 Write smart method:
 .val(), .val($value)
-.download($param)
+.download($param) x2
 
 support pseudo CSS selectors + add custom selectors
 charset also auto detect when xml

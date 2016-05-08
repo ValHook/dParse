@@ -1,6 +1,7 @@
 # dParse
 ![Last tested](https://img.shields.io/badge/last--tested-May%208th%2C%202016-brightgreen.svg)
 ![Latest stable version](https://img.shields.io/badge/latest--stable--version-1.0-brightgreen.svg)
+![Composer](https://img.shields.io/badge/composer-valhok%2Fdparse-yellowgreen.svg)
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Min PHP Version](https://img.shields.io/badge/min--php--version-v5.0.0-orange.svg)
 ![Dependencies](https://img.shields.io/badge/dependencies-cURL-orange.svg)
@@ -10,6 +11,18 @@ dParse is a strong jQuery-like HTML/XML parser written in PHP. I initiated this 
   - Features
   - Flexibility
   - Memory use
+
+## Installation
+When you are in your root directory, you can just run this command to add this package on your app
+```bash
+composer require valhook/dparse:*
+```
+Or add this package to your `composer.json`
+```json
+{
+    "valhook/dparse":"*"
+}
+```
 
 ## Usage
 The information below explains how to use the different functionalities of dParse.
@@ -24,19 +37,19 @@ Below are the default args.
 
 ```php
 $defaultargs = array("method" => "GET", // just concatenate the url and the http body in the source parameter and specify here the HTTP Method
-					 "fake_user_agent" => NULL,
-					 "fake_http_referer" => NULL,
-					 "force_input_charset" => NULL,
-					 "output_charset" => NULL,
-					 "strip_whitespaces" => false,
-					 "connect_timeout" => 10,
-					 "transfer_timeout" => 40,
-					 "verify_peer" => false,
-					 "http_auth_username" => NULL,
-					 "http_auth_password" => NULL,
-					 "cookie_file" => NULL,
-					 "is_xml" => FALSE,
-					 "enable_logger" => FALSE);
+                     "fake_user_agent" => NULL,
+                     "fake_http_referer" => NULL,
+                     "force_input_charset" => NULL,
+                     "output_charset" => NULL,
+                     "strip_whitespaces" => false,
+                     "connect_timeout" => 10,
+                     "transfer_timeout" => 40,
+                     "verify_peer" => false,
+                     "http_auth_username" => NULL,
+                     "http_auth_password" => NULL,
+                     "cookie_file" => NULL,
+                     "is_xml" => FALSE,
+                     "enable_logger" => FALSE);
 
 ```
 
@@ -60,12 +73,12 @@ $dom->setOutputCharset($charset); // Tells dParse if a charset translation shoul
 $dom->getOutputCharset();
 $dom->getNoise(); // Return an array of string of unparsed data
         /* Noise regexes used by dParse, you may add yours at line 270 */
-		$noise = array("'<!--(.*?)-->'is",
-						"'<!DOCTYPE(.*?)>'is",
-						"'<!\[CDATA\[(.*?)\]\]>'is",
-						"'(<\?)(.*?)(\?>)'s",
-						"'(\{\w)(.*?)(\})'s"
-						);
+        $noise = array("'<!--(.*?)-->'is",
+                        "'<!DOCTYPE(.*?)>'is",
+                        "'<!\[CDATA\[(.*?)\]\]>'is",
+                        "'(<\?)(.*?)(\?>)'s",
+                        "'(\{\w)(.*?)(\})'s"
+                        );
 ```
 ### Getting DOM nodes
 DOM nodes/tags are queried with CSS selectors like jQuery
@@ -173,6 +186,7 @@ $node->text(); // Returns the inner text, therefore the inner HTML with HTML tag
 $node->textLenght();
 $node; // This is the __toString method, it is the same as $node->outerHTML();
 ```
+
 #### CSS Sub-querying
 + Just like jQuery, you can perform CSS queries from a node instead of from the whole DOM.
 + If you apply any of the CSS sub-querying functions on a MetaNode, **you will get a MetaNode that is the union of the result of the same query applied to each node**.
@@ -183,7 +197,7 @@ $node; // This is the __toString method, it is the same as $node->outerHTML();
 * **SmartSelector**: The method takes a parameter that can be:
     1. **A CSS Selector**
     2. **A MetaNode or Node** (ex: parentsUntil($node)) will return all the parents until one matches the specified node or is part of the MetaNode
-    3. ***Occasionnaly if that makes sense: An INT*** (ex: parentsUntil(2)) will return the first 2 parents, 
+    3. ***Occasionnaly if that makes sense: An INT*** (ex: parentsUntil(2)) will return the first 2 parents
 
 ##### Methods
 ```php
@@ -221,6 +235,7 @@ $node->setTagName($name); // Changes the tag name, ex span to div;
 ## Logger
 + dParse bundles a logger for debugging purposes.
 + The logger is disabled by default but you can enable it when creating the DOM (it is on the of specifiable arguments) or later via the Logger API
+
 #### Methods
 ```php
 $dom->getLogger(); // Returns the logger object
@@ -321,8 +336,8 @@ $doc->setWhitespaceStripping(true);
 $links = $doc('h3 a[href*=watch]');
 $out = array();
 foreach ($links as $l)
-	$out[] = array("title" => $l->text(), "url" => $l->href);
-	
+    $out[] = array("title" => $l->text(), "url" => $l->href);
+    
 print_r($out);
 ```
 outputs:
