@@ -15,7 +15,7 @@ dParse is a strong jQuery-like HTML/XML parser written in PHP. I initiated this 
 ## Installation
 When you are in your root directory, you can just run this command to add this package on your app
 ```bash
-composer require valhook/dparse:*
+composer require valhook/dparse
 ```
 Or add this package to your `composer.json`
 ```json
