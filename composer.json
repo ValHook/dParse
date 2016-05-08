@@ -6,7 +6,6 @@
     "keywords": ["php", "dom", "dparse", "ganon"],
     "require": {
 	    "php": ">=5.0",
-        "ext-curl": ">=5.0"
     },
     "license": "MIT",
     "authors": [
