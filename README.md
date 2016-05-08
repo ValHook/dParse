@@ -15,7 +15,7 @@ dParse is a strong jQuery-like HTML/XML parser written in PHP. I initiated this 
 ## Installation
 When you are in your root directory, you can just run this command to add this package on your app
 ```bash
-composer require valhook/dparse
+composer require valhook/dparse:*
 ```
 Or add this package to your `composer.json`
 ```json
@@ -247,6 +247,25 @@ $logger->clear(); // Clears all the logs
 $logger->showLogs(); // Echoes all the logs
 $logger->saveLogs($filename); // Writes all the logs to a file
 $logger->log($message); // Logs a message if the logger is enabled
+```
+
+#### Example of logs
+```
+Array
+(
+    [0] => Retrieved document contents in 0.78749895095825 seconds
+    [1] => Now parsing document ...
+    [2] => The document charset was found and is: UTF-8
+    [3] => Found 57 noisy tags.
+    [4] => Ignored 0 tags.
+    [5] => Found 1225 elements, including 0 recreated tags to fix invalid HTML
+    [6] => Document parsed in 0.09472606658936 seconds
+    [7] => Memory peak usage: 13 915 152 bytes
+    [8] => 
+    [9] => Performing CSS query: h3 a[href*=watch]
+    [10] => Found 19 nodes in 0.056853046417236 seconds
+    [11] => Memory peak usage: 14 411 672 bytes
+)
 ```
 
 ## Practical Examples using dParse
